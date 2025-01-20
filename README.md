@@ -81,9 +81,9 @@ streamlit run dashboards/app.py
 4.Dashboarding: Streamlit
 
 ### 📊 Insights
-1.Weather conditions and road types significantly impact accident severity.
-2.Accidents are more likely during peak hours and bad weather.
-3.High-severity zones can be visualized for targeted intervention.
+1. Weather conditions and road types significantly impact accident severity.
+2. Accidents are more likely during peak hours and bad weather.
+3. High-severity zones can be visualized for targeted intervention.
 
 ### 📈 Results
 1.Accuracy: 85% (or replace with your result)
