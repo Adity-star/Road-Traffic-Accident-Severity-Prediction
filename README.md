@@ -96,7 +96,8 @@ streamlit run dashboards/app.py
 
 ### 👩‍💻 Author
 Name - Aditya
-LinkedIn: https://www.linkedin.com/in/aditya-akuskar-27b43533a/
+LinkedIn: https://www.linkedin.com/in/aditya-akuskar-27b43533a/  
+
 GitHub: https://github.com/Adity-star/
 
 
