@@ -1,22 +1,22 @@
 # Road-Accident-Predictions-and-Traffic-Severity-Analysis
 ![image](https://github.com/user-attachments/assets/7e8c7030-2b2b-4c21-a089-c61ff839c164)
 
-# 🚗 Overview
+### 🚗 Overview
 Road accidents are a significant concern worldwide, leading to loss of life, property damage, and traffic disruptions. This project aims to leverage data science techniques to predict road accidents and analyze traffic severity. By understanding patterns and key influencing factors, we can contribute to smarter traffic management and safer roads.
 
-# 📌 Objectives
+### 📌 Objectives
 Predict Accident Likelihood: Utilize machine learning models to forecast road accidents based on historical and real-time data.
 Analyze Traffic Severity: Understand the factors contributing to traffic severity during accidents.
 Data Visualization: Present insights using interactive visualizations for better decision-making.
 
-# 🔧 Features
+### 🔧 Features
 Data Preprocessing: Clean and preprocess accident and traffic datasets.
 Feature Engineering: Extract critical features such as weather conditions, road type, time of day, etc.
 Prediction Models: Train and evaluate machine learning models to predict accident likelihood.
 Severity Analysis: Identify high-severity zones and influencing factors.
 Visualization Dashboards: Create dashboards to explore trends and patterns.
 
-# 📂 Project Structure
+## 📂 Project Structure
 Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 │
 ├── data/                     # Contains datasets (raw and processed)
@@ -42,7 +42,7 @@ Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 ├── LICENSE                   # License information
 └── .gitignore                # Ignored files and folders
 
-# 🚀 Getting Started
+### 🚀 Getting Started
 Prerequisites
 Python 3.8+
 Jupyter Notebook
@@ -51,6 +51,10 @@ Install dependencies:
 pip install -r requirements.txt
 
 # Running the Project
+![image](https://github.com/user-attachments/assets/c351d044-a8c6-46ac-b05b-9f8018fcb468)
+![image](https://github.com/user-attachments/assets/9b732ca7-c4ed-4ff4-8b7f-448c3ade64e5)
+
+
 Clone the repository:
 git clone https://github.com/yourusername/Road-Accident-Predictions-and-Traffic-Severity-Analysis.git
 cd Road-Accident-Predictions-and-Traffic-Severity-Analysis
