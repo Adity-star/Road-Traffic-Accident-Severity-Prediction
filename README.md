@@ -5,16 +5,16 @@
 Road accidents are a significant concern worldwide, leading to loss of life, property damage, and traffic disruptions. This project aims to leverage data science techniques to predict road accidents and analyze traffic severity. By understanding patterns and key influencing factors, we can contribute to smarter traffic management and safer roads.
 
 ### 📌 Objectives
-Predict Accident Likelihood: Utilize machine learning models to forecast road accidents based on historical and real-time data.
-Analyze Traffic Severity: Understand the factors contributing to traffic severity during accidents.
-Data Visualization: Present insights using interactive visualizations for better decision-making.
+1.Predict Accident Likelihood: Utilize machine learning models to forecast road accidents based on historical and real-time data.
+2.Analyze Traffic Severity: Understand the factors contributing to traffic severity during accidents.
+3.Data Visualization: Present insights using interactive visualizations for better decision-making.
 
 ### 🔧 Features
-Data Preprocessing: Clean and preprocess accident and traffic datasets.
-Feature Engineering: Extract critical features such as weather conditions, road type, time of day, etc.
-Prediction Models: Train and evaluate machine learning models to predict accident likelihood.
-Severity Analysis: Identify high-severity zones and influencing factors.
-Visualization Dashboards: Create dashboards to explore trends and patterns.
+1.Data Preprocessing: Clean and preprocess accident and traffic datasets.
+2.Feature Engineering: Extract critical features such as weather conditions, road type, time of day, etc.
+3.Prediction Models: Train and evaluate machine learning models to predict accident likelihood.
+4.Severity Analysis: Identify high-severity zones and influencing factors.
+5.Visualization Dashboards: Create dashboards to explore trends and patterns.
 
 ### 📂 Project Structure
 ```bash
@@ -56,43 +56,43 @@ pip install -r requirements.txt
 ```
 
 ### Running the Project
-```bash
 Clone the repository:
+```bash
 git clone https://github.com/yourusername/Road-Accident-Predictions-and-Traffic-Severity-Analysis.git
 cd Road-Accident-Predictions-and-Traffic-Severity-Analysis
 ```
-```bash
 Process the data:
+```bash
 python src/preprocessing.py
 ```
-```bash
 Train the model:
+```bash
 python src/modeling.py
 ```
-```bash
 Launch the dashboard:
+```bash
 streamlit run dashboards/app.py
 ```
 
 ### 🛠️ Tools and Technologies
-Data Preprocessing: Pandas, NumPy
-Visualization: Matplotlib, Seaborn, Plotly
-Machine Learning: Scikit-learn, XGBoost, LightGBM
-Dashboarding: Streamlit
+1.Data Preprocessing: Pandas, NumPy
+2.Visualization: Matplotlib, Seaborn, Plotly
+3.Machine Learning: Scikit-learn, XGBoost, LightGBM
+4.Dashboarding: Streamlit
 
 ### 📊 Insights
-Weather conditions and road types significantly impact accident severity.
-Accidents are more likely during peak hours and bad weather.
-High-severity zones can be visualized for targeted intervention.
+1.Weather conditions and road types significantly impact accident severity.
+2.Accidents are more likely during peak hours and bad weather.
+3.High-severity zones can be visualized for targeted intervention.
 
 ### 📈 Results
-Accuracy: 85% (or replace with your result)
-Top Features: Weather, Road Type, Time of Day
+1.Accuracy: 85% (or replace with your result)
+2.Top Features: Weather, Road Type, Time of Day
 
 ### 🧩 Future Scope
-Incorporate real-time data for dynamic predictions.
-Expand analysis to multiple cities or regions.
-Develop a mobile application for real-time alerts.
+1.Incorporate real-time data for dynamic predictions.
+2.Expand analysis to multiple cities or regions.
+3.Develop a mobile application for real-time alerts.
 
 ### 👩‍💻 Author
 Name - Aditya
