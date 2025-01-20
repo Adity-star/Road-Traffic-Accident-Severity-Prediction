@@ -17,7 +17,7 @@ Severity Analysis: Identify high-severity zones and influencing factors.
 Visualization Dashboards: Create dashboards to explore trends and patterns.
 
 ### 📂 Project Structure
-'''bash
+```bash
 Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 │
 ├── data/                     # Contains datasets (raw and processed)
@@ -42,26 +42,37 @@ Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 ├── environment.yml           # Conda environment file (optional)
 ├── LICENSE                   # License information
 └── .gitignore                # Ignored files and folders
-'''
+ ```
 
 ### 🚀 Getting Started
 Prerequisites
 Python 3.8+
 Jupyter Notebook
 Libraries: pandas, numpy, scikit-learn, matplotlib, seaborn, Plotly, Streamlit
+
+```bash
 Install dependencies:
 pip install -r requirements.txt
+```
 
 ### Running the Project
+```bash
 Clone the repository:
 git clone https://github.com/yourusername/Road-Accident-Predictions-and-Traffic-Severity-Analysis.git
 cd Road-Accident-Predictions-and-Traffic-Severity-Analysis
+```
+```bash
 Process the data:
 python src/preprocessing.py
+```
+```bash
 Train the model:
 python src/modeling.py
+```
+```bash
 Launch the dashboard:
 streamlit run dashboards/app.py
+```
 
 ### 🛠️ Tools and Technologies
 Data Preprocessing: Pandas, NumPy
@@ -84,7 +95,7 @@ Expand analysis to multiple cities or regions.
 Develop a mobile application for real-time alerts.
 
 ### 👩‍💻 Author
-Your Aditya
+Name - Aditya
 LinkedIn: https://www.linkedin.com/in/aditya-akuskar-27b43533a/
 GitHub: https://github.com/Adity-star/
 
