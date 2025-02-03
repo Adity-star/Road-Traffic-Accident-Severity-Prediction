@@ -28,7 +28,7 @@ Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 │   ├── 01_data_preprocessing.ipynb
 │   ├── 02_feature_engineering.ipynb
 │   ├── 03_model_training.ipynb
-│   ├── 04_visualizations.ipynb
+│ 
 │
 ├── src/                      # Source code for the project
 │   ├── preprocessing.py      # Scripts for data cleaning
