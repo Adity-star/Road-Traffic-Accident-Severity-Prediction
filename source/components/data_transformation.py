@@ -48,7 +48,7 @@ class DataTransformation:
 
             
             # Drop unnecessary columns before processing the data
-            columns_to_drop = ['vehicle_driver_relation', 'work_of_casuality', 'fitness_of_casuality','day_of_week','casualty_severity','time','sex_of_driver','educational_level','defect_of_vehicle','owner_of_vehicle','service_year_of_vehicle', 'road_surface_type','sex_of_casualty']
+            columns_to_drop = ['vehicle_driver_relation', 'work_of_casuality', 'fitness_of_casuality','day_of_week','casualty_severity','time','sex_of_driver','educational_level','defect_of_vehicle','owner_of_vehicle','service_year_of_vehicle','time', 'road_surface_type','sex_of_casualty']
             df = self.drop_unnecessary_columns(df, columns_to_drop)
             
             # Get list of numerical and categorical columns

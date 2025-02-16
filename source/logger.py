@@ -3,7 +3,9 @@ import os
 from datetime import datetime
 
 LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+
 logs_path = os.path.join(os.getcwd(),'logs',LOG_FILE)
+
 os.makedirs(logs_path,exist_ok=True)
 
 LOG_FILE_PATH = os.path.join(logs_path,LOG_FILE)
@@ -15,5 +17,10 @@ logging.basicConfig(
     
 )
 
-
+if __name__ == '__main__':
+    try:
+        logging.info("Logging has started")
+        # You can log other information or exceptions here
+    except Exception as e:
+        logging.error(f"Error occurred: {e}")
 
