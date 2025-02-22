@@ -1,6 +1,7 @@
 # still working on this
 # Road-Accident-Predictions-and-Traffic-Severity-Analysis
-![image](https://github.com/user-attachments/assets/7e8c7030-2b2b-4c21-a089-c61ff839c164)
+![image](https://github.com/user-attachments/assets/a9d8892f-a69b-4a64-8d0e-6a694971e536)
+
 
 ### 🚗 Overview
 Road accidents are a significant concern worldwide, leading to loss of life, property damage, and traffic disruptions. This project aims to leverage data science techniques to predict road accidents and analyze traffic severity. By understanding patterns and key influencing factors, we can contribute to smarter traffic management and safer roads.
