@@ -1,6 +1,7 @@
-# still working on this
+
 # Road-Accident-Predictions-and-Traffic-Severity-Analysis
-![image](https://github.com/user-attachments/assets/7e8c7030-2b2b-4c21-a089-c61ff839c164)
+![image](https://github.com/user-attachments/assets/a9d8892f-a69b-4a64-8d0e-6a694971e536)
+
 
 ### 🚗 Overview
 Road accidents are a significant concern worldwide, leading to loss of life, property damage, and traffic disruptions. This project aims to leverage data science techniques to predict road accidents and analyze traffic severity. By understanding patterns and key influencing factors, we can contribute to smarter traffic management and safer roads.
@@ -21,6 +22,7 @@ Road accidents are a significant concern worldwide, leading to loss of life, pro
 ```bash
 Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 │
+├──artifacts
 ├── data/                     # Contains datasets (raw and processed)
 │   ├── raw/
 │   ├── processed/
@@ -31,19 +33,30 @@ Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 │   ├── 03_model_training.ipynb
 │ 
 │
-├── source/                      # Source code for the project
-│   ├── preprocessing.py      # Scripts for data cleaning
-│   ├── modeling.py           # Scripts for machine learning models
-│   ├── analysis.py           # Scripts for severity analysis
-│
-├── dashboards/               # Visualization dashboards (e.g., Streamlit, Plotly)
-│
-├── README.md                 # Project documentation
-├── requirements.txt          # Dependencies
-├── environment.yml           # Conda environment file (optional)
+├── source/
+|    ├──components
+│    │    ├──  __init__.py                  # Source code for the project
+│    │    ├── preprocessing.py      # Scripts for data cleaning
+│    │    ├── modeling.py           # Scripts for machine learning models
+│    │    ├── analysis.py           # Scripts for severity analysis
+│    ├── Pipeline
+|    │    ├── __init__.py
+│    │    ├── predict_pipeline.py
+│    │    ├── train_pipeline.py
+│    ├── __init__.py
+│    ├──  exception.py
+│    ├── logger.py
+│    ├──  utils.py
+├── templates
+│       ├── home.html
+├── venv                # Conda environment file (optional)
+├── .gitignore
+├── app.py
 ├── LICENSE                   # License information
-└── .gitignore                # Ignored files and folders
- ```
+├── README.md                 # Project documentation
+├── requirements.txt          # Dependencies 
+├── setup.py                 
+```
 
 ### 🚀 Getting Started
 Prerequisites
