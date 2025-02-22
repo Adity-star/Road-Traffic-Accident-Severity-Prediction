@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accident Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script type="text/javascript">
+        function toggleOtherField(selectElement, inputId) {
+            var inputField = document.getElementById(inputId);
+            if (selectElement.value === "other") {
+                inputField.style.display = "block";
+            } else {
+                inputField.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Accident Prediction Form</h1>
+        
+        <form action="/predictdata" method="post">
+            <h2><legend>Enter Accident Data for Prediction</legend></h2>
+
+            <!-- Age Band of Driverender -->
+            <div class="mb-3">
+                <label class="form-label">Age Band of Driverender</label>
+                <select class="form-control" name="age_band_of_driver" required onchange="toggleOtherField(this, 'age_band_of_driver_other')">
+                    <option class="placeholder" selected disabled value="">Select Age Band</option>
+                    {% for option in age_band_of_driverender %}
+                        <option value="{{ option }}" {% if request.form.get('age_band_of_driver') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="age_band_of_driver_other" id="age_band_of_driver_other" style="display:none;" placeholder="Enter Custom Age Band" />
+            </div>
+
+            <!-- Driving Experience -->
+            <div class="mb-3">
+                <label class="form-label">Driving Experience</label>
+                <select class="form-control" name="driving_experience" required onchange="toggleOtherField(this, 'driving_experience_other')">
+                    <option class="placeholder" selected disabled value="">Select Driving Experience</option>
+                    {% for option in driving_experience %}
+                        <option value="{{ option }}" {% if request.form.get('driving_experience') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="driving_experience_other" id="driving_experience_other" style="display:none;" placeholder="Enter Custom Driving Experience" />
+            </div>
+
+            <!-- Type of Vehicle -->
+            <div class="mb-3">
+                <label class="form-label">Type of Vehicle</label>
+                <select class="form-control" name="type_of_vehicle" required onchange="toggleOtherField(this, 'type_of_vehicle_other')">
+                    <option class="placeholder" selected disabled value="">Select Type of Vehicle</option>
+                    {% for option in type_of_vehicle %}
+                        <option value="{{ option }}" {% if request.form.get('type_of_vehicle') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="type_of_vehicle_other" id="type_of_vehicle_other" style="display:none;" placeholder="Enter Custom Type of Vehicle" />
+            </div>
+
+            <!-- Area of Accident -->
+            <div class="mb-3">
+                <label class="form-label">Area Accident Occurred</label>
+                <select class="form-control" name="area_accident_occured" required onchange="toggleOtherField(this, 'area_accident_occured_other')">
+                    <option class="placeholder" selected disabled value="">Select Area of Accident</option>
+                    {% for option in area_accident_occured %}
+                        <option value="{{ option }}" {% if request.form.get('area_accident_occured') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="area_accident_occured_other" id="area_accident_occured_other" style="display:none;" placeholder="Enter Custom Area of Accident" />
+            </div>
+
+            <!-- Lanes or Medians -->
+            <div class="mb-3">
+                <label class="form-label">Lanes or Medians</label>
+                <select class="form-control" name="lanes_or_medians" required onchange="toggleOtherField(this, 'lanes_or_medians_other')">
+                    <option class="placeholder" selected disabled value="">Select Lanes or Medians</option>
+                    {% for option in lanes_or_medians %}
+                        <option value="{{ option }}" {% if request.form.get('lanes_or_medians') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="lanes_or_medians_other" id="lanes_or_medians_other" style="display:none;" placeholder="Enter Custom Lanes or Medians" />
+            </div>
+
+            <!-- Road Alignment -->
+            <div class="mb-3">
+                <label class="form-label">Road Alignment</label>
+                <select class="form-control" name="road_allignment" required onchange="toggleOtherField(this, 'road_allignment_other')">
+                    <option class="placeholder" selected disabled value="">Select Road Alignment</option>
+                    {% for option in road_allignment %}
+                        <option value="{{ option }}" {% if request.form.get('road_allignment') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="road_allignment_other" id="road_allignment_other" style="display:none;" placeholder="Enter Custom Road Alignment" />
+            </div>
+
+            <!-- Types of Junction -->
+            <div class="mb-3">
+                <label class="form-label">Types of Junction</label>
+                <select class="form-control" name="types_of_junction" required onchange="toggleOtherField(this, 'types_of_junction_other')">
+                    <option class="placeholder" selected disabled value="">Select Types of Junction</option>
+                    {% for option in types_of_junction %}
+                        <option value="{{ option }}" {% if request.form.get('types_of_junction') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="types_of_junction_other" id="types_of_junction_other" style="display:none;" placeholder="Enter Custom Type of Junction" />
+            </div>
+
+            <!-- Road Surface Conditions -->
+            <div class="mb-3">
+                <label class="form-label">Road Surface Conditions</label>
+                <select class="form-control" name="road_surface_conditions" required onchange="toggleOtherField(this, 'road_surface_conditions_other')">
+                    <option class="placeholder" selected disabled value="">Select Road Surface Conditions</option>
+                    {% for option in road_surface_conditions %}
+                        <option value="{{ option }}" {% if request.form.get('road_surface_conditions') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="road_surface_conditions_other" id="road_surface_conditions_other" style="display:none;" placeholder="Enter Custom Road Surface Conditions" />
+            </div>
+
+            <!-- Light Conditions -->
+            <div class="mb-3">
+                <label class="form-label">Light Conditions</label>
+                <select class="form-control" name="light_conditions" required onchange="toggleOtherField(this, 'light_conditions_other')">
+                    <option class="placeholder" selected disabled value="">Select Light Conditions</option>
+                    {% for option in light_conditions %}
+                        <option value="{{ option }}" {% if request.form.get('light_conditions') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="light_conditions_other" id="light_conditions_other" style="display:none;" placeholder="Enter Custom Light Conditions" />
+            </div>
+
+            <!-- Weather Conditions -->
+            <div class="mb-3">
+                <label class="form-label">Weather Conditions</label>
+                <select class="form-control" name="weather_conditions" required onchange="toggleOtherField(this, 'weather_conditions_other')">
+                    <option class="placeholder" selected disabled value="">Select Weather Conditions</option>
+                    {% for option in weather_conditions %}
+                        <option value="{{ option }}" {% if request.form.get('weather_conditions') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="weather_conditions_other" id="weather_conditions_other" style="display:none;" placeholder="Enter Custom Weather Conditions" />
+            </div>
+
+            <!-- Type of Collision -->
+            <div class="mb-3">
+                <label class="form-label">Type of Collision</label>
+                <select class="form-control" name="type_of_collision" required onchange="toggleOtherField(this, 'type_of_collision_other')">
+                    <option class="placeholder" selected disabled value="">Select Type of Collision</option>
+                    {% for option in type_of_collision %}
+                        <option value="{{ option }}" {% if request.form.get('type_of_collision') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="type_of_collision_other" id="type_of_collision_other" style="display:none;" placeholder="Enter Custom Type of Collision" />
+            </div>
+
+            <!-- Number of Vehicles Involved -->
+            <div class="mb-3">
+                <label class="form-label">Number of Vehicles Involved</label>
+                <input class="form-control" type="number" name="number_of_vehicles_involved" placeholder="Enter number of vehicles involved" min="1" required />
+            </div>
+
+            <!-- Number of Casualties -->
+            <div class="mb-3">
+                <label class="form-label">Number of Casualties</label>
+                <input class="form-control" type="number" name="number_of_casualties" placeholder="Enter number of casualties" min="0" required />
+            </div>
+
+            <!-- Vehicle Movement -->
+            <div class="mb-3">
+                <label class="form-label">Vehicle Movement</label>
+                <select class="form-control" name="vehicle_movement" required onchange="toggleOtherField(this, 'vehicle_movement_other')">
+                    <option class="placeholder" selected disabled value="">Select Vehicle Movement</option>
+                    {% for option in vehicle_movement %}
+                        <option value="{{ option }}" {% if request.form.get('vehicle_movement') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="vehicle_movement_other" id="vehicle_movement_other" style="display:none;" placeholder="Enter Custom Vehicle Movement" />
+            </div>
+
+            <!-- Casualty Class -->
+            <div class="mb-3">
+                <label class="form-label">Casualty Class</label>
+                <select class="form-control" name="casualty_class" required onchange="toggleOtherField(this, 'casualty_class_other')">
+                    <option class="placeholder" selected disabled value="">Select Casualty Class</option>
+                    {% for option in casualty_class %}
+                        <option value="{{ option }}" {% if request.form.get('casualty_class') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="casualty_class_other" id="casualty_class_other" style="display:none;" placeholder="Enter Custom Casualty Class" />
+            </div>
+
+            <!-- Age Band of Casualty -->
+            <div class="mb-3">
+                <label class="form-label">Age Band of Casualty</label>
+                <select class="form-control" name="age_band_of_casualty" required onchange="toggleOtherField(this, 'age_band_of_casualty_other')">
+                    <option class="placeholder" selected disabled value="">Select Age Band of Casualty</option>
+                    {% for option in age_band_of_casualty %}
+                        <option value="{{ option }}" {% if request.form.get('age_band_of_casualty') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option>
+                </select>
+                <input type="text" class="form-control mt-2" name="age_band_of_casualty_other" id="age_band_of_casualty_other" style="display:none;" placeholder="Enter Custom Age Band of Casualty" />
+            </div>
+
+            <!-- Pedestrian Movement -->
+            <div class="mb-3">
+                <label class="form-label">Pedestrian Movement</label>
+                <select class="form-control" name="pedestrian_movement" required onchange="toggleOtherField(this, 'pedestrian_movement_other')">
+                    <option class="placeholder" selected disabled value="">Select Pedestrian Movement</option>
+                    {% for option in pedestrian_movement %}
+                        <option value="{{ option }}" {% if request.form.get('pedestrian_movement') == option %} selected {% endif %}>{{ option }}</option>
+                    {% endfor %}
+                    <option value="other">Other (Enter Custom Value)</option
+                        <div class="mb-3">
+                            <input class="btn btn-primary" type="submit" value="Predict Accident Outcome" />
+                        </div>
+                    </form>
+            
+                    <h2>
+                        THE prediction is: {{ results }}
+                    </h2>
+                </div>
+            </body>
+            </html>
+            

@@ -1,19 +1,23 @@
 import sys
+import logging
 from dataclasses import dataclass
 
 import pandas as pd
-import numpy as np 
+import numpy as np
 
+from source.exception import CustomException
+from source.logger import logging
 
-from sklearn.preprocessing import LabelEncoder ,OneHotEncoder
+from sklearn.preprocessing import LabelEncoder ,OneHotEncoder,StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+
 
 from source.exception import CustomException
 from source.logger import logging
 import os
+
 from source.utils import save_object
 
 @dataclass
@@ -29,7 +33,7 @@ class DataTransformation:
 
         def drop_unnecessary_columns(self, df, columns_to_drop):
             logging.info(f"Dropping unnecessary columns :{columns_to_drop}")
-            df = df.drop(columns=columns_to_drop,errors='ignore')
+            df = df.drop(columns=columns_to_drop,errors = 'ignore')
 
             return df
 
@@ -45,29 +49,42 @@ class DataTransformation:
 
         def get_data_transformer_object(self,df):
             logging.info("Handling data columns")
+            target_column_name = "accident_severity"
 
-            
+
             # Drop unnecessary columns before processing the data
-            columns_to_drop = ['vehicle_driver_relation', 'work_of_casuality', 'fitness_of_casuality','day_of_week','casualty_severity','time','sex_of_driver','educational_level','defect_of_vehicle','owner_of_vehicle','service_year_of_vehicle','time', 'road_surface_type','sex_of_casualty']
-            df = self.drop_unnecessary_columns(df, columns_to_drop)
-            
+            columns_to_drop = ['age_band_of_driver','time','vehicle_driver_relation', 'work_of_casuality', 'fitness_of_casuality','day_of_week','casualty_severity','time','sex_of_driver','educational_level','defect_of_vehicle','owner_of_vehicle','service_year_of_vehicle', 'road_surface_type','sex_of_casualty','age_band_of_casualty','age_band_of_driver']
+            columns_to_drop = [col for col in columns_to_drop if col != target_column_name]
+
+
             # Get list of numerical and categorical columns
-            numerical_columns = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
-            categorical_columns = df.select_dtypes(include=['object']).columns.tolist()
+            numerical_columns = df.select_dtypes(include = ['float64', 'int64']).columns.tolist()
+            categorical_columns = df.select_dtypes(include = ['object']).columns.tolist()
+
+
+            #Creating SimpleImputer objects with the appropriate strategies
+            simpleimputer_mode = SimpleImputer(strategy = 'most_frequent')
+            simpleimputer_mean = SimpleImputer(strategy = 'mean')
+
+            if categorical_columns: 
+                df[categorical_columns] = simpleimputer_mode.fit_transform(df[categorical_columns])
+            
+            
+            if numerical_columns:
+                df[numerical_columns] = simpleimputer_mean.fit_transform(df[numerical_columns])
+
 
             # Creating pipeline for numerical data (Imputation and Scaling)
             numerical_pipeline = Pipeline(
                 steps = [
-                    ("imputer",SimpleImputer(strategy = 'mean')),
                     ("scaler",StandardScaler())
                 ]
             )
-            
+
             # Creating pipeline for categorical data (Imputation and OneHotEncoding)
             categorical_pipeline = Pipeline(
                 steps = [
-                    ("imputer",SimpleImputer(strategy='most_frequent')),
-                    ("onehotencoder",OneHotEncoder(handle_unknown='ignore')),
+                    ("onehotencoder",OneHotEncoder(handle_unknown='ignore', sparse_output = False)), # sparse=False for numpy array
                 ]
             )
 
@@ -96,28 +113,36 @@ class DataTransformation:
 
                 logging.info("Obtaining preprocessing object")
 
-                preprocessor_obj = self.get_data_transformer_object(train_df)
-
                 target_column_name = "accident_severity"
-        
+
+                # Separate target before transformation on train data
                 logging.info("Splitting the data into features and target")
-                input_feature_train_df = train_df.drop(columns=[target_column_name],axis=1)
+
+                input_feature_train_df = train_df.drop(columns = [target_column_name],axis = 1)
                 target_feature_train_df = train_df[target_column_name]
 
-                input_feature_test_df = test_df.drop(columns=[target_column_name],axis=1)
+                input_feature_test_df = test_df.drop(columns = [target_column_name],axis = 1)
                 target_feature_test_df = test_df[target_column_name]
 
-                logging.info(f"Applying preprocessing object on training data and testing data")
+                # Get the preprocessor object
+                preprocessing_obj = self.get_data_transformer_object(input_feature_train_df)
 
-                train_arr = np.c_[input_feature_train_df,np.array(target_feature_train_df)]
+                # Transform the input features
+                input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
+                input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df) # Apply to features only
 
-                test_arr = np.c_[input_feature_test_df, np.array(target_feature_test_df)]
 
-                logging.info(f'Saved preprocessing object sucessfully')
+
+                logging.info("Applying preprocessing object on training data and testing data")
+
+                train_arr = np.c_[input_feature_train_arr, target_feature_train_df.values.reshape(-1, 1)]  
+                test_arr = np.c_[input_feature_test_arr, target_feature_test_df.values.reshape(-1, 1)]
+
+                logging.info('Saved preprocessing object sucessfully')
 
                 save_object (
                     file_path = self.data_transform_config.preprocessor_obj_file_path,
-                    obj = preprocessor_obj
+                    obj = preprocessing_obj # Save the preprocessor object
                 )
 
                 return (
@@ -129,10 +154,3 @@ class DataTransformation:
             except Exception as e:
                 logging.error(f"Error occurred in data transformation: {str(e)}")
                 raise CustomException(e,sys)
-
-
-
-
-
-
-

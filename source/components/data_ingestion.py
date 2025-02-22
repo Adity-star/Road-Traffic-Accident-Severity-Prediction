@@ -1,12 +1,11 @@
-import os     
+import os
 import sys
+import pandas as pd
+
 from source.exception import CustomException
 from source.logger import logging
-import pandas as pd
-import traceback
-
-
 from sklearn.model_selection import train_test_split
+
 from dataclasses import dataclass
 
 from source.components.data_transformation import DataTransformation
@@ -15,64 +14,52 @@ from source.components.data_transformation import DataTransformationConfig
 from source.components.model_trainer import ModelTrainerConfig
 from source.components.model_trainer import ModelTrainer
 
-
-#Configure logging
+# Configure logging
 logging.basicConfig(level=logging.INFO)
 
 @dataclass
-
 class DataIngestionConfig:
-    train_data_path : str = os.path.join('artifacts','train.csv')
-    test_data_path : str = os.path.join('artifacts','test.csv')
-    raw_data_path : str = os.path.join('artifacts','data.csv')
 
+    train_data_path: str = os.path.join('artifacts', 'train.csv')
+    test_data_path: str = os.path.join('artifacts', 'test.csv')
+    raw_data_path: str = os.path.join('artifacts', 'data.csv')
 
 class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
 
-    
     def initiate_data_ingestion(self):
-        logging.info("Entered th data ingestion method ")
+        logging.info("Entered the data ingestion method")
         try:
-            # Check if the processed data file exists
-            processed_data_path = r"C:\Users\Administrator\OneDrive\Desktop\Accident prediction\Datasets\processed\processed_data.csv"
-    
+            df = pd.read_csv(r'C:\Users\Administrator\OneDrive\Desktop\Accident prediction\notebooks\processed_data.csv')
 
-            df = pd.read_csv(processed_data_path)
-            logging.info('Read the dataset')
+            logging.info("Read the dataset successfully")
 
-            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
+            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
 
-            df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
+            df.to_csv(self.ingestion_config.raw_data_path, index = False)
 
-            logging.info("Data is dividing into train and test")
-            train_set,test_set=train_test_split(df,test_size=0.2,random_state=42)
+            train_set, test_set = train_test_split(df, test_size=0.2, random_state = 42)
+            train_set.to_csv(self.ingestion_config.train_data_path, index = False)
+            test_set.to_csv(self.ingestion_config.test_data_path, index = False)
 
-            train_set.to_csv(self.ingestion_config.train_data_path,index=False,header=True)
-
-            test_set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
-
-            logging.info("Ingestion of the data is completed")
-
+            logging.info("Data ingestion completed successfully")
             return (
                 self.ingestion_config.train_data_path,
                 self.ingestion_config.test_data_path
             )
 
-
         except Exception as e:
-            logging.error(f'An error occcured during data ingestion: {str(e)}')
-
-            raise CustomException(str(e),sys)
-
+            logging.error(f"Error during data ingestion: {e}")
+            raise CustomException(str(e), sys)
+        
 
 if __name__ == "__main__":
-    obj = DataIngestion()
-    train_data,test_data=obj.initiate_data_ingestion()
+    ingestion = DataIngestion()
+    train_data, test_data = ingestion.initiate_data_ingestion()
 
-    data_transformation = DataTransformation()
-    train_arr, test_arr ,_ = data_transformation.initiate_data_transformation(train_data, test_data)
+    transformation = DataTransformation()
+    train_arr, test_arr, _ = transformation.initiate_data_transformation(train_data,test_data)
 
-    modeltrainer = ModelTrainer()
-    print(modeltrainer.initiate_model_trainer(train_arr, test_arr))
+    trainer = ModelTrainer()
+    print(trainer.initiate_model_trainer(train_arr, test_arr))

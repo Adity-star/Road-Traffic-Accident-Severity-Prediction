@@ -24,11 +24,8 @@ def evaluate_models(X_train, y_train, X_test, y_test, models):
     acc_result = {}
 
     try:
-        report = {}
 
-        for i in range(len(list(models))):
-            model = list(models.values())[i]
-            
+        for model_name, model in models.items():            
 
             model.fit(X_train, y_train)
 
@@ -38,10 +35,10 @@ def evaluate_models(X_train, y_train, X_test, y_test, models):
             train_model_score = accuracy_score(y_train, y_train_pred)
             test_model_score = accuracy_score(y_test, y_test_pred)
 
-            report[model] = test_model_score
-            acc_result[model] = test_model_score
+            acc_result[model_name] = test_model_score
 
         return acc_result 
+    
     except Exception as e:
         raise CustomException(e, sys)
 
@@ -58,9 +55,9 @@ def best_model(result):
 def best_params(model, param, X_train, y_train):
     try:
         # Define cross-validation strategy
-        cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=2, random_state=42)
+        cv = RepeatedStratifiedKFold(n_splits = 5, n_repeats = 2, random_state = 42)
 
-        grid_cv = GridSearchCV(estimator=model, param_grid=param, cv=cv, scoring="accuracy")  # scoring="accuracy" for classification
+        grid_cv = GridSearchCV(estimator = model, param_grid = param, cv = cv, scoring = "accuracy")  # scoring="accuracy" for classification
         res = grid_cv.fit(X_train, y_train)
 
         return res.best_params_
@@ -68,4 +65,11 @@ def best_params(model, param, X_train, y_train):
     except Exception as e:
         raise CustomException(e, sys)
 
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
+
+    except Exception as e:
+        raise CustomException(e, sys)
 

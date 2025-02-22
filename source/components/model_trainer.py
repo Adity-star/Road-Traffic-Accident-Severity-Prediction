@@ -1,5 +1,6 @@
 import os
 import sys
+
 from dataclasses import dataclass
 
 from sklearn.ensemble import (
@@ -14,11 +15,11 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler,MinMaxScaler,LabelEncoder
 from sklearn.model_selection import RepeatedStratifiedKFold,GridSearchCV
 from sklearn.model_selection import KFold 
-from sklearn.ensemble import RandomForestClassifier,AdaBoostClassifier,GradientBoostingClassifier
-from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
+from sklearn.metrics import accuracy_score
 
 from source.exception import CustomException
 from source.logger import logging
@@ -36,18 +37,18 @@ class ModelTrainer:
     def __init__(self):
         self.model_trainer_config = ModelTrainerConfig()
 
-    def initiate_model_trainer(self,train_array,test_array):
-
+    def initiate_model_trainer(self, train_array, test_array):
         logging.info("Spliting the dataset into train and tests sets")
+
 
         acc_result = {}
 
-        X_train,y_train,X_test,y_test=(
-                train_array[:,:-1],
-                train_array[:,-1],
-                test_array[:,:-1],
-                test_array[:,-1]
-            )
+        X_train, y_train, X_test, y_test = (
+            train_array[:, :-1], 
+            train_array[:, -1], 
+            test_array[:, :-1], 
+            test_array[:, -1]
+        )
         
         models={
             "LogisticRegression":LogisticRegression(),
@@ -59,8 +60,8 @@ class ModelTrainer:
             "GradientBoostingClassifier":GradientBoostingClassifier(),
         }
 
-        model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
-                                            models=models)
+        model_report:dict = evaluate_models(X_train = X_train,y_train = y_train,X_test = X_test,y_test = y_test,
+                                            models = models)
         
         # Collect results in acc_result
         for model_name, model_acc in model_report.items():
@@ -76,8 +77,8 @@ class ModelTrainer:
         param_grids = self.get_param_grid_for_model(best_model_name)
 
         # Perform Grid Search to find the best parameters
-        grid_search = GridSearchCV(estimator=best_model_instance, param_grid=param_grids, 
-                                cv=5, scoring='accuracy', n_jobs=-1)
+        grid_search = GridSearchCV(estimator = best_model_instance, param_grid = param_grids, 
+                                cv = 5, scoring='accuracy', n_jobs = -1)
         grid_search.fit(X_train, y_train)
 
         # Get the best parameters and model
@@ -93,11 +94,18 @@ class ModelTrainer:
         y_pred = best_model_instance.predict(X_test)
         tuned_accuracy = accuracy_score(y_test, y_pred)
 
-        logging.info(f"Tuned {best_model_name} accuracy: {tuned_accuracy}")
+        logging.info(f"Tuned {best_model_name} accuracy: {tuned_accuracy}") 
 
-        return acc_result, best_model_name, best_params, tuned_accuracy
+        # Save the best model
+        save_object(
+            file_path = self.model_trainer_config.trained_model_file_path,
+            obj = best_model_instance
+        )
+
+        return  tuned_accuracy
         
-def get_param_grid_for_model(self, model_name):
+    def get_param_grid_for_model(self, model_name):
+
         # Define parameter grids for each model (this is an example; you can adjust as necessary)
         param_grids = {
             "LogisticRegression": {
