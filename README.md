@@ -1,3 +1,4 @@
+# still working on this
 # Road-Accident-Predictions-and-Traffic-Severity-Analysis
 ![image](https://github.com/user-attachments/assets/7e8c7030-2b2b-4c21-a089-c61ff839c164)
 
@@ -30,7 +31,7 @@ Road-Accident-Predictions-and-Traffic-Severity-Analysis/
 │   ├── 03_model_training.ipynb
 │ 
 │
-├── src/                      # Source code for the project
+├── source/                      # Source code for the project
 │   ├── preprocessing.py      # Scripts for data cleaning
 │   ├── modeling.py           # Scripts for machine learning models
 │   ├── analysis.py           # Scripts for severity analysis
