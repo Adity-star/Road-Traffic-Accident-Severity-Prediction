@@ -9,6 +9,7 @@ from source.exception import CustomException
 
 
 def save_object(file_path, obj):
+
     try:
         dir_path = os.path.dirname(file_path)
 
@@ -44,15 +45,19 @@ def evaluate_models(X_train, y_train, X_test, y_test, models):
 
     
 def best_model(result):
+
     high = 0
     model_name = None
+
     for name, acc in result.items():
         if acc > high:
             high = acc
             model_name = name
+
     return model_name
 
 def best_params(model, param, X_train, y_train):
+
     try:
         # Define cross-validation strategy
         cv = RepeatedStratifiedKFold(n_splits = 5, n_repeats = 2, random_state = 42)
@@ -66,6 +71,7 @@ def best_params(model, param, X_train, y_train):
         raise CustomException(e, sys)
 
 def load_object(file_path):
+    
     try:
         with open(file_path, "rb") as file_obj:
             return pickle.load(file_obj)

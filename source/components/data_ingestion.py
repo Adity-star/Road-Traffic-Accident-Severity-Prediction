@@ -29,8 +29,11 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
+
         logging.info("Entered the data ingestion method")
+
         try:
+
             df = pd.read_csv(r'C:\Users\Administrator\OneDrive\Desktop\Accident prediction\notebooks\processed_data.csv')
 
             logging.info("Read the dataset successfully")
@@ -44,6 +47,7 @@ class DataIngestion:
             test_set.to_csv(self.ingestion_config.test_data_path, index = False)
 
             logging.info("Data ingestion completed successfully")
+
             return (
                 self.ingestion_config.train_data_path,
                 self.ingestion_config.test_data_path
@@ -55,6 +59,7 @@ class DataIngestion:
         
 
 if __name__ == "__main__":
+    
     ingestion = DataIngestion()
     train_data, test_data = ingestion.initiate_data_ingestion()
 

@@ -35,9 +35,11 @@ class ModelTrainerConfig():
 
 class ModelTrainer:
     def __init__(self):
+
         self.model_trainer_config = ModelTrainerConfig()
 
     def initiate_model_trainer(self, train_array, test_array):
+
         logging.info("Spliting the dataset into train and tests sets")
 
 
@@ -139,6 +141,7 @@ class ModelTrainer:
                 "max_depth": [3, 5],
             }
         }
+        
         return param_grids.get(model_name, {})
             
 

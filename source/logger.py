@@ -18,9 +18,10 @@ logging.basicConfig(
 )
 
 if __name__ == '__main__':
+
     try:
         logging.info("Logging has started")
-        # You can log other information or exceptions here
+        
     except Exception as e:
         logging.error(f"Error occurred: {e}")
 

@@ -23,6 +23,7 @@ from source.utils import save_object
 @dataclass
 
 class DataTransformationConfig:
+
     preprocessor_obj_file_path = os.path.join('artifacts','preprecessor.pkl')
 
 class DataTransformation:
@@ -32,6 +33,7 @@ class DataTransformation:
             self.data_transform_config = DataTransformationConfig()
 
         def drop_unnecessary_columns(self, df, columns_to_drop):
+
             logging.info(f"Dropping unnecessary columns :{columns_to_drop}")
             df = df.drop(columns=columns_to_drop,errors = 'ignore')
 
@@ -48,6 +50,7 @@ class DataTransformation:
 
 
         def get_data_transformer_object(self,df):
+
             logging.info("Handling data columns")
             target_column_name = "accident_severity"
 
@@ -105,7 +108,9 @@ class DataTransformation:
 
 
         def initiate_data_transformation(self,train_path,test_path):
+
             try:
+
                 train_df = pd.read_csv(train_path)
                 test_df = pd.read_csv(test_path)
 
@@ -130,7 +135,6 @@ class DataTransformation:
                 # Transform the input features
                 input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
                 input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df) # Apply to features only
-
 
 
                 logging.info("Applying preprocessing object on training data and testing data")
