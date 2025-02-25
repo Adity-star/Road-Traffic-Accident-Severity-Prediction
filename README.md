@@ -1,6 +1,8 @@
 
 # Road-Accident-Predictions-and-Traffic-Severity-Analysis
-![image](https://github.com/user-attachments/assets/a9d8892f-a69b-4a64-8d0e-6a694971e536)
+
+![Screenshot (205)](https://github.com/user-attachments/assets/b6b5e928-737d-4024-b0ee-47db2f32861a)
+
 
 
 ### 🚗 Overview
